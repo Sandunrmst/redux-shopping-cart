@@ -1,4 +1,6 @@
 export default function ProductCard({ product }) {
+  function handleAddToCart() {}
+
   return (
     <div>
       <div className="flex flex-col items-center border-2 border-red-950 gap-3 p-4 h-auto mt-10 ml-5 rounded-xl">
