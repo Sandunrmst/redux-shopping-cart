@@ -1,5 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../store/slices/cartslice";
+
 export default function ProductCard({ product }) {
-  function handleAddToCart() {}
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state);
+
+  function handleAddToCart() {
+    //dispatch use to send data to store
+    dispatch(addToCart(product));
+  }
+
+  function handleRemoveFromCart() {
+    console.log("removed");
+    dispatch(removeFromCart(product.id));
+  }
 
   return (
     <div>
@@ -17,8 +31,17 @@ export default function ProductCard({ product }) {
           </h1>
         </div>
         <div className="flex items-center justify-center w-full mt-5">
-          <button className="bg-orange-700 text-white border-2 rounded-lg font-bold p-4">
-            Add to Cart
+          <button
+            onClick={
+              cart.some((item) => item.id === product.id)
+                ? handleRemoveFromCart
+                : handleAddToCart
+            }
+            className="bg-orange-700 text-white border-2 rounded-lg font-bold p-4"
+          >
+            {cart.some((item) => item.id === product.id)
+              ? "Remove from cart"
+              : "Add to cart"}
           </button>
         </div>
       </div>
